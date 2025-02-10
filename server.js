@@ -1,10 +1,19 @@
 var express = require('express');
 
 var app = express();
+app.use(express.json());
 
-app.get('/', function(req, res) {
-    res.send(req.body);
-    console.log(req.body)
+app.post('/', function(req, res) {
+    const accept = req.get('Accept');
+    if (accept) {
+        res.setHeader('Accept', accept);
+    }
+
+    const resBody = {
+        acceptHeader: accept,
+        ...req.body
+    }
+    res.json(resBody);
 });
 
 app.listen(process.env.PORT || 8008, function() {
