@@ -10,7 +10,6 @@ app.post('/', function(req, res) {
     }
 
     const resBody = {
-        acceptHeader: accept,
         ...req.body
     }
     res.json(resBody);
